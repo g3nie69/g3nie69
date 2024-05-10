@@ -1,0 +1,81 @@
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class MetalWorksLoginPage {
+    private JFrame frame;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+
+    public MetalWorksLoginPage() {
+        createGUI();
+    }
+
+    private void createGUI() {
+        frame = new JFrame("Metal Works Login");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        JLabel usernameLabel = new JLabel("Username:");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        panel.add(usernameLabel, gbc);
+
+        usernameField = new JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        panel.add(usernameField, gbc);
+
+        JLabel passwordLabel = new JLabel("Password:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        panel.add(passwordLabel, gbc);
+
+        passwordField = new JPasswordField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        panel.add(passwordField, gbc);
+
+        JButton loginButton = new JButton("Login");
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        loginButton.addActionListener(new LoginButtonListener());
+        panel.add(loginButton, gbc);
+
+        frame.getContentPane().add(panel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    private class LoginButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+
+            // TO DO: Add database connection and authentication logic here
+
+            // For demonstration purposes, just print out the username and password
+            System.out.println("Username: " + username);
+            System.out.println("Password: " + password);
+
+            // If authentication is successful, redirect to main page
+            // Otherwise, display error message
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new MetalWorksLoginPage();
+            }
+        });
+    }
+}
